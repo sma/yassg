@@ -1,0 +1,26 @@
+body {
+  background: #FFF;
+  color: #666;
+  margin: 40px;
+  width: 600px;
+  font:normal 15px/21px Georgia,serif;
+}
+
+a {
+  color: #C03;
+  font-weight: bold;
+}
+
+.note {
+  border: 4px solid #393;
+  padding: 0 10px 0 70px;
+}
+
+.note:before {
+  float:left;
+  margin:5px 0 0 -50px;
+  content:"!";
+  font-size:100px;
+  line-height:100px;
+  color:#393;
+}

@@ -1,0 +1,23 @@
+---
+layout: standard
+title: Home, Sweet Home
+navigation:
+  name: Home
+  weight: 1
+names:
+  - name: Aragon
+  - name: Boromir
+  - name: Gimli
+  - name: Sam
+---
+<h1>{{title}}</h1>
+<ul>
+  {{#names}}
+  <li>{{name}}</li>
+  {{/names}}
+</ul>
+<hr>
+<h2>Version {{site.settings.version}} &mdash; {{{site.copyright}}}</h2>
+<hr>
+{{> footer}}
+<hr>

@@ -1,0 +1,25 @@
+{
+  "name": "yassg",
+  "version": "0.0.1",
+  "description": "yet another static site generator",
+  "bin": {
+    "yawfw": "bin/yassg"
+  },
+  "repository": "",
+  "keywords": [
+    "static",
+    "site",
+    "generator",
+    "express"
+  ],
+  "author": "sma",
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.0.0rc2",
+    "marked": "~0.2.5",
+    "hogan": "~1.0.5-dev",
+    "yamljs": "~0.1.1",
+    "watch": "~0.5.1",
+    "ws": "~0.4.21"
+  }
+}

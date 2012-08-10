@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+
+/* Copyright 2012 by Stefan Matthias Aust. All rights reserved. */
+
+var fs = require('fs');
+
+function usage(){
+  console.log("usage: yassg new <dir> - create a new project")
+  console.log("       yassg watch     - development mode")
+  console.log("       yassg build     - generate the site")
+  process.exit(1);
+}
+
+function new_(dir){
+  console.log("generating new site", dir, "...");
+  if (dir){
+    mkdir(dir);
+    dir += "/";
+  }else{
+    dir = "";
+  }
+  mkdir(dir + "layouts");
+  mkdir(dir + "pages");
+  mkdir(dir + "properties");
+  mkdir(dir + "static");
+  write(dir + "layouts/default.html",
+    "<html>\n"+
+    "  <head>\n"+
+    "    <link rel='stylesheet' href='style.css'>\n"+
+    "    <title>{{title}}</title>\n"+
+    "  </head>\n"+
+    "  <body>\n"+
+    "    {{{content}}}\n"+
+    "    <div id='footer'>&copy;{{site.settings.copyright}}</div>\n"+
+    "  </body>\n"+
+    "</html>");
+  write(dir + "pages/index.md",
+    "---\n"+
+    "layout: default\n"+
+    "title: Homepage\n"+
+    "---\n"+
+    "Welcome to **Yassg**!\n"+
+    "\n"+
+    "{{#site.pages}}\n"+
+    " * {{name}}\n"+
+    "{{/site.pages}}");
+  write(dir + "properties/settings.yaml",
+    "---\n"+
+    "copyright: 2012");
+  write(dir + "static/style.css",
+    "#footer { margin-top:20px; padding-top:10px; border-top:1px solid #DDD; }");
+  
+  function mkdir(path){
+    if (!fs.existsSync(path)) fs.mkdirSync(path);
+  }
+  
+  function write(path, s){
+    fs.writeFileSync(path, s, 'utf8');
+  }
+}
+
+function watch(){
+  console.log("Running server on localhost:3000");
+  require(__dirname + "/../index").run(3000);
+}
+
+function build(){
+  console.log("not yet implemented");
+}
+
+if (process.argv.length < 3) usage();
+
+switch (process.argv[2]){
+  case 'new': new_(process.argv[3]); break;
+  case 'watch': watch(); break;
+  case 'build': build(); break;
+  default: usage();
+}
