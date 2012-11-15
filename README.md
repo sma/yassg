@@ -24,7 +24,7 @@ Open a web browser on <http://localhost:3000/> and start developing your site. I
 A yassg project uses the following directories:
 
 * `layouts`: layout files used to wrap pages or other layouts
-* `pages`: files may contain a front matter (see below) and are filtered through mustache
+* `pages`: page files may contain a front matter (see below) and are filtered through mustache
 * `properties`: data files which can be accessed in all pages and layouts
 * `static`: these files are copied without change
 
@@ -35,7 +35,7 @@ Everything else is read as string. A file `foo.json` containing an object with a
 
 ## Front Matter
 
-Files in `layouts` or `pages` that start with three dashes (`---`) contain a YAML formatted set of properties which are read and used for example to find a layout file to wrap that page.
+Files in `layouts` or `pages` that start with three dashes (`---`) contain a YAML formatted set of properties which is read and used for example to find a layout file to wrap that page with a layout.
 
 Example:
 
@@ -84,7 +84,7 @@ The following syntax can be used to wrap sections in a `div` with a certain clas
     some text
     +----------
 
-The `+` must be the first character and followed by at least three dashes. Dashes after the class name are optional.
+The `+` must be the first character of the line and followed by at least three dashes. Dashes after the class name are optional. There must be at least 3 dashes and no class name in the bottom line.
 
 
 ## License
