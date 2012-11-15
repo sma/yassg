@@ -1,7 +1,7 @@
 /* Copyright 2012 by Stefan Matthias Aust. All rights reserved. */
 var express = require('express'), 
   yaml = require('yamljs'), 
-  hogan = require('hogan'),
+  hogan = require('hogan.js'),
   marked = require('marked'),
   fs = require('fs'),
   exists = fs.existsSync,

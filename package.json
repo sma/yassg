@@ -1,6 +1,6 @@
 {
   "name": "yassg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "yet another static site generator",
   "bin": {
     "yawfw": "bin/yassg"
@@ -15,11 +15,11 @@
   "author": "sma",
   "license": "BSD",
   "dependencies": {
-    "express": "~3.0.0rc2",
+    "express": "~3.0.3",
     "marked": "~0.2.5",
-    "hogan": "~1.0.5-dev",
-    "yamljs": "~0.1.1",
+    "hogan.js": "~2.0.0",
+    "yamljs": "~0.1.3",
     "watch": "~0.5.1",
-    "ws": "~0.4.21"
+    "ws": "~0.4.22"
   }
 }
