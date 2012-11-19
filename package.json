@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "yet another static site generator",
   "bin": {
-    "yawfw": "bin/yassg"
+    "yassg": "bin/yassg"
   },
   "repository": "",
   "keywords": [
