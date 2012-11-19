@@ -2,28 +2,28 @@
 
 /* Copyright 2012 by Stefan Matthias Aust. All rights reserved. */
 
-var fs = require('fs');
+var fs = require('fs'), path = require('path');
 
 function usage(){
-  console.log("usage: yassg new <dir> - create a new project")
-  console.log("       yassg watch     - development mode")
-  console.log("       yassg build     - generate the site")
+  console.log("usage: yassg new <directory>  - create a new site")
+  console.log("       yassg watch [<port>]   - development mode")
+  console.log("       yassg build [<output>] - generate the site")
   process.exit(1);
 }
 
-function new_(dir){
-  console.log("generating new site", dir, "...");
+function newSite(dir){
+  if (!dir){
+    usage();
+  }
+  console.log("create new site", dir, "...");
   if (dir){
     mkdir(dir);
-    dir += "/";
-  }else{
-    dir = "";
   }
-  mkdir(dir + "layouts");
-  mkdir(dir + "pages");
-  mkdir(dir + "properties");
-  mkdir(dir + "static");
-  write(dir + "layouts/default.html",
+  mkdir(join(dir, "layouts"));
+  mkdir(join(dir, "pages"));
+  mkdir(join(dir, "properties"));
+  mkdir(join(dir, "static"));
+  write(join(dir, "layouts", "default.html"),
     "<html>\n"+
     "  <head>\n"+
     "    <link rel='stylesheet' href='style.css'>\n"+
@@ -34,7 +34,7 @@ function new_(dir){
     "    <div id='footer'>&copy;{{site.settings.copyright}}</div>\n"+
     "  </body>\n"+
     "</html>");
-  write(dir + "pages/index.md",
+  write(join(dir, "pages", "index.mdown"),
     "---\n"+
     "layout: default\n"+
     "title: Homepage\n"+
@@ -44,35 +44,44 @@ function new_(dir){
     "{{#site.pages}}\n"+
     " * {{name}}\n"+
     "{{/site.pages}}");
-  write(dir + "properties/settings.yaml",
+  write(join(dir, "properties", "settings.yaml"),
     "---\n"+
     "copyright: 2012");
-  write(dir + "static/style.css",
+  write(join(dir, "static", "style.css"),
     "#footer { margin-top:20px; padding-top:10px; border-top:1px solid #DDD; }");
+  console.log("done");
+  
+  function join(){
+    return path.join.apply(this, arguments);
+  }
   
   function mkdir(path){
     if (!fs.existsSync(path)) fs.mkdirSync(path);
   }
   
   function write(path, s){
+    console.log(" create", path);
     fs.writeFileSync(path, s, 'utf8');
   }
 }
 
-function watch(){
-  console.log("Running server on localhost:3000");
-  require(__dirname + "/../index").run(3000);
+function watchSite(port){
+  port = Number(port) || 3000;
+  console.log("Running server on localhost:" + port);
+  require(__dirname + "/../index").run(port);
 }
 
-function build(){
-  console.log("not yet implemented");
+function buildSite(dir){
+  dir = dir || "built";
+  console.log("Building site to", dir);
+  require(__dirname + "/../index").build(dir);
 }
 
 if (process.argv.length < 3) usage();
 
 switch (process.argv[2]){
-  case 'new': new_(process.argv[3]); break;
-  case 'watch': watch(); break;
-  case 'build': build(); break;
+  case 'new': newSite(process.argv[3]); break;
+  case 'watch': watchSite(process.argv[3]); break;
+  case 'build': buildSite(process.argv[3]); break;
   default: usage();
 }
