@@ -60,14 +60,14 @@ Example:
     
     This will list all page names:
       {{#pages}}
-      {{#name}}
+      {{name}}
       {{/pages}}
     
     {{> partial}} will embed the content of `layouts/_partial.html`
 
 Templates may access the following properties:
 
-* `name`: the page name (`-` are replaced with spaces)
+* `name`: the page name (dashes and underscores are replaced with spaces)
 * `path`: the full path of the page (a.k.a. URL)
 * `site`: all data read from the `properties` directory
 * `site.pages`: all pages of this site
