@@ -5,7 +5,7 @@
   "bin": {
     "yassg": "bin/yassg"
   },
-  "repository": "",
+  "repository": "https://github.com/sma/yassg",
   "keywords": [
     "static",
     "site",
